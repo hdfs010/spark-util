@@ -44,7 +44,7 @@ object StreamingKafkaContextTest{
     initJobConf(conf)
     println(conf.getKV())
     val scf = new SparkConf().setMaster("local[2]").setAppName("Test")
-    val sc = new SparkKafkaContext(scf)
+    val sc = new SparkContext(scf)
     val ssc = new StreamingKafkaContext(sc, Seconds(5))
     val ds = ssc.createDirectStream(conf, msgHandle)
     ds.foreachRDD { rdd => rdd.foreach(println) }
